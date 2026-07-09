@@ -347,17 +347,6 @@ export function Checklist() {
         {CHECKLIST_SECTIONS.map((section) => (
           <ChecklistSection key={section.name} section={section} states={states} onItemChange={handleItemChange} />
         ))}
-
-        <section className="section">
-          <div className="button-group">
-            <button className="button button-secondary" onClick={exportPDF}>
-              📄 Exportar
-            </button>
-            <button className="button button-primary" onClick={handleReset}>
-              🔄 Reiniciar
-            </button>
-          </div>
-        </section>
       </main>
     </div>
   );
