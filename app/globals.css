@@ -1,26 +1,427 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap");
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #faf7f3;
+  --primary: #e8b8a8;
+  --primary-dark: #d9a499;
+  --primary-light: #f0d5c8;
+  --beige: #efe9e3;
+  --champagne: #e8dfd5;
+  --text-dark: #2a2520;
+  --text-light: #5a5550;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: "Hanken Grotesk", sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+/* Header */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 248, 244, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+.header-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  height: 819px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--champagne);
+}
+
+.shader-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem 1.25rem;
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  margin-bottom: 2.5rem;
+}
+
+.hero-btn {
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  font-family: "Hanken Grotesk", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-height: 48px;
+}
+
+.hero-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(249, 168, 212, 0.3);
+}
+
+/* Main Content */
+.main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.section {
+  width: 100%;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(249, 168, 212, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container {
+  margin-bottom: 2rem;
+}
+
+.progress-label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background: rgba(249, 168, 212, 0.15);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.section-note {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.item-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.checkbox-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem;
+  background: rgba(249, 168, 212, 0.05);
+}
+
+.checkbox-tile:hover {
+  background: rgba(249, 168, 212, 0.1);
+}
+
+.checkbox-tile input[type="checkbox"] {
+  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--primary);
+  border-radius: 0.375rem;
+  flex-shrink: 0;
+}
+
+.checkbox-tile label {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+.checkbox-tile.checked label {
+  color: var(--text-light);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.numbered-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.numbered-tile {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(249, 168, 212, 0.2);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+.numbered-tile:hover {
+  border-color: var(--primary);
+  background: rgba(249, 168, 212, 0.05);
+}
+
+.numbered-tile.checked {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-height: 48px;
+}
+
+.button-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.button-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 168, 212, 0.3);
+}
+
+.button-secondary {
+  background: var(--beige);
+  color: var(--text-dark);
+  border: 1px solid rgba(249, 168, 212, 0.2);
+}
+
+.button-secondary:hover {
+  background: var(--champagne);
+  border-color: var(--primary);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .main-content {
+    padding: 2rem 1.25rem;
+    gap: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-content {
+    padding: 1rem 1.25rem;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+  }
 }
