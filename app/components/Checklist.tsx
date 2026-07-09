@@ -311,21 +311,11 @@ export function Checklist() {
         justifyContent: "center",
         overflow: "hidden",
         backgroundImage: "url('/hero.webp')",
-        backgroundSize: "100% auto",
+        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundColor: "#faf7f3"
       }}>
-        {/* Subtle overlay */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: "linear-gradient(135deg, rgba(232, 181, 168, 0.15) 0%, rgba(250, 247, 243, 0.2) 100%)"
-        }} />
-
         <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: "48rem", margin: "0 auto" }}>
           <span className="hero-tag fade-in-up">Preparativos para bebé</span>
           <h1 className="hero-title fade-in-up delay-100">Wishlist de 🐣</h1>
