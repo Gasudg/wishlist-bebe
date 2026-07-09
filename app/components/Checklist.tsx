@@ -281,7 +281,7 @@ export function Checklist() {
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        backgroundImage: "url('https://images.unsplash.com/photo-1770831208117-c0dd9469e95d?auto=format&fit=crop&w=1400&h=800')",
+        backgroundImage: "url('/hero.webp')",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
