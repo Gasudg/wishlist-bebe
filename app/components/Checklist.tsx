@@ -15,6 +15,7 @@ export function Checklist() {
     new Map()
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [lastSync, setLastSync] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export function Checklist() {
   }, []);
 
   async function fetchStates() {
+    setIsSyncing(true);
     try {
       const response = await fetch("/api/checklist/state");
       if (!response.ok) throw new Error("Failed to fetch states");
@@ -59,6 +61,7 @@ export function Checklist() {
       console.error("Failed to fetch checklist state:", error);
     } finally {
       setIsLoading(false);
+      setIsSyncing(false);
     }
   }
 
@@ -262,6 +265,10 @@ export function Checklist() {
       <header className="sticky-header">
         <div className="header-content">
           <div className="brand-name">Wishlist de 🐣</div>
+          <div style={{ fontSize: "0.75rem", color: isSyncing ? "#e8b8a8" : "#999", display: "flex", alignItems: "center", gap: "0.5rem", minHeight: "20px" }}>
+            {isSyncing && <span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid #e8b8a8", borderRadius: "50%", borderTop: "2px solid transparent", animation: "spin 0.6s linear infinite" }} />}
+            {isSyncing ? "Sincronizando..." : lastSync ? `✓ Sincronizado` : ""}
+          </div>
           <div className="header-actions">
             <button className="header-btn" onClick={exportPDF}>
               Exportar PDF
@@ -276,13 +283,13 @@ export function Checklist() {
       <section style={{
         position: "relative",
         width: "100%",
-        minHeight: "450px",
+        minHeight: "400px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
         backgroundImage: "url('/hero.webp')",
-        backgroundSize: "cover",
+        backgroundSize: "100% auto",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundColor: "#faf7f3"

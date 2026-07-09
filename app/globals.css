@@ -46,6 +46,11 @@ h1, h2, h3, h4, h5, h6 {
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Header */
 .sticky-header {
   position: sticky;
