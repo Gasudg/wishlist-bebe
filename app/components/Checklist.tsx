@@ -276,13 +276,13 @@ export function Checklist() {
       <section style={{
         position: "relative",
         width: "100%",
-        minHeight: "700px",
+        minHeight: "450px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
         backgroundImage: "url('/hero.webp')",
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundColor: "#faf7f3"
