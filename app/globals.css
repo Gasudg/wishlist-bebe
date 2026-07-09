@@ -53,11 +53,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Header */
 .sticky-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
-  background: rgba(255, 248, 244, 0.8);
-  backdrop-filter: blur(12px);
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #fff8f4;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   width: 100%;
 }

@@ -283,7 +283,7 @@ export function Checklist() {
   const totalItems = allItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div style={{ background: "#fff8f4", minHeight: "100vh" }}>
+    <div style={{ background: "#fff8f4", minHeight: "100vh", paddingTop: "70px" }}>
       <header className="sticky-header">
         <div className="header-content">
           <div className="brand-name">Wishlist de 🐣</div>
