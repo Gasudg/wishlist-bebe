@@ -19,8 +19,8 @@ export function Checklist() {
   const [lastSync, setLastSync] = useState<Date | null>(null);
 
   useEffect(() => {
-    fetchStates();
-    const pollInterval = setInterval(fetchStates, 5000);
+    fetchStatesSilent();
+    const pollInterval = setInterval(fetchStatesSilent, 5000);
 
     // Scroll animations
     setTimeout(() => {
@@ -42,6 +42,27 @@ export function Checklist() {
     return () => clearInterval(pollInterval);
   }, []);
 
+  async function fetchStatesSilent() {
+    try {
+      const response = await fetch("/api/checklist/state");
+      if (!response.ok) throw new Error("Failed to fetch states");
+      const data = await response.json();
+
+      const newStates = new Map<string, ChecklistItemState[]>();
+      getAllItems().forEach((item) => {
+        const itemStates = data[item.id] || [];
+        newStates.set(item.id, itemStates);
+      });
+
+      setStates(newStates);
+      setLastSync(new Date());
+    } catch (error) {
+      console.error("Failed to fetch checklist state:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   async function fetchStates() {
     setIsSyncing(true);
     try {
@@ -61,7 +82,7 @@ export function Checklist() {
       console.error("Failed to fetch checklist state:", error);
     } finally {
       setIsLoading(false);
-      setIsSyncing(false);
+      setTimeout(() => setIsSyncing(false), 800);
     }
   }
 
@@ -82,6 +103,7 @@ export function Checklist() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ itemId, unitIndex, checked }),
       });
+      fetchStates();
     } catch (error) {
       console.error("Failed to update item:", error);
       fetchStates();
