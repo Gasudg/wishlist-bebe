@@ -304,7 +304,10 @@ export function Checklist() {
 
       <section style={{
         position: "relative",
+        maxWidth: "1280px",
         width: "100%",
+        margin: "0 auto",
+        padding: "0 1.25rem",
         minHeight: "400px",
         display: "flex",
         alignItems: "center",
@@ -316,9 +319,9 @@ export function Checklist() {
         backgroundPosition: "center",
         backgroundColor: "#faf7f3"
       }}>
-        <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: "48rem", margin: "0 auto" }}>
+        <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: "48rem", margin: "0 auto", width: "100%" }}>
           <span className="hero-tag fade-in-up">Preparativos para bebé</span>
-          <h1 className="hero-title fade-in-up delay-100">Wishlist de 🐣</h1>
+          <h1 className="hero-title-fancy">Wishlist de 🐣</h1>
           <p className="hero-subtitle fade-in-up delay-200">Checklist por talle · nace en enero</p>
         </div>
       </section>
