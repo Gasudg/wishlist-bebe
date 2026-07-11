@@ -110,24 +110,6 @@ export function Checklist() {
     }
   }
 
-  async function handleReset() {
-    if (
-      !confirm(
-        "¿Estás segura de que querés reiniciar el checklist? Se borrarán todos los ítems marcados."
-      )
-    ) {
-      return;
-    }
-
-    try {
-      await fetch("/api/checklist/reset", { method: "POST" });
-      setStates(new Map());
-      fetchStates();
-    } catch (error) {
-      console.error("Failed to reset checklist:", error);
-    }
-  }
-
   function initShader() {
     try {
       const canvas = document.getElementById("hero-shader") as HTMLCanvasElement;
@@ -290,9 +272,6 @@ export function Checklist() {
           <div className="header-actions">
             <button className="header-btn" onClick={exportPDF}>
               Exportar PDF
-            </button>
-            <button className="header-btn" onClick={handleReset}>
-              Reiniciar
             </button>
           </div>
         </div>
