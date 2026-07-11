@@ -287,10 +287,6 @@ export function Checklist() {
       <header className="sticky-header">
         <div className="header-content">
           <div className="brand-name">Wishlist de Juanita</div>
-          <div style={{ fontSize: "0.75rem", color: isSyncing ? "#e8b8a8" : "#999", display: "flex", alignItems: "center", gap: "0.5rem", minHeight: "20px" }}>
-            {isSyncing && <span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid #e8b8a8", borderRadius: "50%", borderTop: "2px solid transparent", animation: "spin 0.6s linear infinite" }} />}
-            {isSyncing ? "Sincronizando..." : lastSync ? `✓ Sincronizado` : ""}
-          </div>
           <div className="header-actions">
             <button className="header-btn" onClick={exportPDF}>
               Exportar PDF
@@ -341,6 +337,17 @@ export function Checklist() {
           <ChecklistSection key={section.name} section={section} states={states} onItemChange={handleItemChange} />
         ))}
       </main>
+
+      <div
+        className="sync-badge"
+        title={isSyncing ? "Sincronizando..." : lastSync ? `Sincronizado ${lastSync.toLocaleTimeString("es-AR")}` : ""}
+      >
+        {isSyncing ? (
+          <span style={{ display: "inline-block", width: "12px", height: "12px", border: "2px solid #e8b8a8", borderRadius: "50%", borderTop: "2px solid transparent", animation: "spin 0.6s linear infinite" }} />
+        ) : (
+          <span style={{ color: "#c8a898", fontSize: "0.8rem" }}>✓</span>
+        )}
+      </div>
     </div>
   );
 }
