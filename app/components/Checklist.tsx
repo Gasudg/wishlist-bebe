@@ -211,7 +211,7 @@ export function Checklist() {
 
     pdf.setFontSize(20);
     pdf.setFont("helvetica", "bold");
-    pdf.text("Wishlist de 🐣", margin, yPos);
+    pdf.text("Wishlist de Juanita", margin, yPos);
     yPos += 8;
 
     pdf.setFontSize(10);
@@ -286,7 +286,7 @@ export function Checklist() {
     <div style={{ background: "#fff8f4", minHeight: "100vh", paddingTop: "70px" }}>
       <header className="sticky-header">
         <div className="header-content">
-          <div className="brand-name">Wishlist de 🐣</div>
+          <div className="brand-name">Wishlist de Juanita</div>
           <div style={{ fontSize: "0.75rem", color: isSyncing ? "#e8b8a8" : "#999", display: "flex", alignItems: "center", gap: "0.5rem", minHeight: "20px" }}>
             {isSyncing && <span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid #e8b8a8", borderRadius: "50%", borderTop: "2px solid transparent", animation: "spin 0.6s linear infinite" }} />}
             {isSyncing ? "Sincronizando..." : lastSync ? `✓ Sincronizado` : ""}
@@ -321,7 +321,7 @@ export function Checklist() {
       }}>
         <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: "48rem", margin: "0 auto", width: "100%" }}>
           <span className="hero-tag fade-in-up">Preparativos para bebé</span>
-          <h1 className="hero-title-fancy">Wishlist de 🐣</h1>
+          <h1 className="hero-title-fancy">Wishlist de Juanita</h1>
           <p className="hero-subtitle fade-in-up delay-200">Checklist por talle · nace en enero</p>
         </div>
       </section>
