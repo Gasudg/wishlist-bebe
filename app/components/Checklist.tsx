@@ -320,9 +320,12 @@ export function Checklist() {
         backgroundColor: "#faf7f3"
       }}>
         <div style={{ position: "relative", zIndex: 10, textAlign: "center", maxWidth: "48rem", margin: "0 auto", width: "100%" }}>
-          <span className="hero-tag fade-in-up">Preparativos para bebé</span>
-          <h1 className="hero-title-fancy">Wishlist de Juanita</h1>
-          <p className="hero-subtitle fade-in-up delay-200">Checklist por talle · nace en enero</p>
+          <div className="hero-title-card">
+            <span className="hero-tag">Preparativos para bebé</span>
+            <h1 className="hero-title-fancy">Wishlist de Juanita</h1>
+            <p className="hero-subtitle" style={{ marginBottom: 0 }}>Checklist por talle · nace en enero</p>
+            <div className="hero-title-heart">♡ ♡ ♡</div>
+          </div>
         </div>
       </section>
 
