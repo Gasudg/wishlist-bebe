@@ -69,17 +69,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title-fancy {
-  background: linear-gradient(135deg, #d9a499 0%, #c49080 100%);
+  background: linear-gradient(135deg, #e0bfb0 0%, #d4a898 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 4px 15px rgba(0, 0, 0, 0.25);
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
   animation: fadeInUp 0.8s ease-out;
   letter-spacing: -0.02em;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
 /* Header */
