@@ -37,14 +37,16 @@ export function ChecklistSection({
       </div>
 
       <div style={{ marginTop: "1.5rem" }}>
-        {itemsInSection.map((item) => (
-          <ItemRenderer
-            key={item.id}
-            item={item}
-            states={states.get(item.id) || []}
-            onItemChange={onItemChange}
-          />
-        ))}
+        {[...itemsInSection]
+          .sort((a, b) => (a.quantity === 1 ? 0 : 1) - (b.quantity === 1 ? 0 : 1))
+          .map((item) => (
+            <ItemRenderer
+              key={item.id}
+              item={item}
+              states={states.get(item.id) || []}
+              onItemChange={onItemChange}
+            />
+          ))}
       </div>
     </div>
   );
