@@ -61,6 +61,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         quantity: 1,
         section: "RN",
       },
+      {
+        id: "rn_11",
+        label: "Pijamitas livianos",
+        quantity: 3,
+        section: "RN",
+      },
     ],
   },
   {
@@ -127,6 +133,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         id: "1_3m_12",
         label: "Camperita liviana",
         quantity: 1,
+        section: "1–3M",
+      },
+      {
+        id: "1_3m_13",
+        label: "Pijamitas livianos",
+        quantity: 4,
         section: "1–3M",
       },
     ],
