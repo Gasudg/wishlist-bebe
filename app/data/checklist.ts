@@ -87,6 +87,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         quantity: 5,
         section: "1–3M",
       },
+      {
+        id: "1_3m_9",
+        label: "Pantalones livianos",
+        quantity: 3,
+        section: "1–3M",
+      },
     ],
   },
   {
@@ -133,6 +139,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         id: "3_6m_7",
         label: 'Pijamas enteros con pie "pilita"',
         quantity: 4,
+        section: "3–6M",
+      },
+      {
+        id: "3_6m_8",
+        label: "Pantalones abrigados",
+        quantity: 5,
         section: "3–6M",
       },
     ],
