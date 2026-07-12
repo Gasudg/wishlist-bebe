@@ -286,6 +286,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         section: "Alimentación",
       },
       { id: "alim_6", label: "Chupetes", quantity: 3, section: "Alimentación" },
+      {
+        id: "alim_7",
+        label: "Babitas/paños de provechito",
+        quantity: 6,
+        section: "Alimentación",
+      },
     ],
   },
   {
