@@ -55,6 +55,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         quantity: 2,
         section: "RN",
       },
+      {
+        id: "rn_10",
+        label: "Camperita liviana",
+        quantity: 1,
+        section: "RN",
+      },
     ],
   },
   {
@@ -115,6 +121,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         id: "1_3m_11",
         label: "Remeras manga larga",
         quantity: 2,
+        section: "1–3M",
+      },
+      {
+        id: "1_3m_12",
+        label: "Camperita liviana",
+        quantity: 1,
         section: "1–3M",
       },
     ],
