@@ -81,6 +81,12 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
         quantity: 5,
         section: "1–3M",
       },
+      {
+        id: "1_3m_8",
+        label: "Bodies musculosa",
+        quantity: 5,
+        section: "1–3M",
+      },
     ],
   },
   {
