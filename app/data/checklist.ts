@@ -210,6 +210,102 @@ export const CHECKLIST_SECTIONS: ChecklistSection[] = [
     ],
   },
   {
+    name: "6–9M",
+    note: "6 a 9 meses · pleno invierno",
+    items: [
+      {
+        id: "6_9m_1",
+        label: "Bodies manga larga",
+        quantity: 7,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_2",
+        label: "Remeras manga larga",
+        quantity: 5,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_3",
+        label: "Pantalones abrigados/joggings",
+        quantity: 5,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_4",
+        label: "Sweaters o buzos abrigados",
+        quantity: 3,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_5",
+        label: "Campera abrigada",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_6",
+        label: 'Pijamas enteros con pie "pilita" abrigados',
+        quantity: 4,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_7",
+        label: "Gorro de lana",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_8",
+        label: "Medias abrigadas",
+        quantity: 5,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_9",
+        label: "Mitones/guantes",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_10",
+        label: "Botitas abrigadas",
+        quantity: 2,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_11",
+        label: "Manta abrigada",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_12",
+        label: "Silla de comer (arranca la alimentación complementaria)",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_13",
+        label: "Baberos plásticos con bolsillo",
+        quantity: 2,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_14",
+        label: "Set de platos y cucharas de bebé",
+        quantity: 1,
+        section: "6–9M",
+      },
+      {
+        id: "6_9m_15",
+        label: "Vasito de aprendizaje",
+        quantity: 1,
+        section: "6–9M",
+      },
+    ],
+  },
+  {
     name: "Equipo esencial",
     items: [
       { id: "equipo_1", label: "Cochecito", quantity: 1, section: "Equipo esencial" },
