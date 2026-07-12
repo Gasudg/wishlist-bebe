@@ -182,29 +182,80 @@ export function Checklist() {
     }
   }
 
-  function exportPDF() {
+  function loadHeroForPDF(): Promise<{ data: string; ratio: number } | null> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return resolve(null);
+          ctx.drawImage(img, 0, 0);
+          resolve({
+            data: canvas.toDataURL("image/jpeg", 0.85),
+            ratio: img.naturalHeight / img.naturalWidth,
+          });
+        } catch {
+          resolve(null);
+        }
+      };
+      img.onerror = () => resolve(null);
+      img.src = "/hero.webp";
+    });
+  }
+
+  async function exportPDF() {
     const pdf = new jsPDF();
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
     const margin = 15;
-    const maxWidth = pageWidth - margin * 2;
-    let yPos = margin;
-    const lineHeight = 5;
+    const contentWidth = pageWidth - margin * 2;
 
-    pdf.setFontSize(20);
-    pdf.setFont("helvetica", "bold");
-    pdf.text("Wishlist de Juanita", margin, yPos);
+    const cream: [number, number, number] = [250, 247, 243];
+    const peachLight: [number, number, number] = [240, 213, 200];
+    const peachDark: [number, number, number] = [196, 125, 106];
+    const textDark: [number, number, number] = [42, 37, 32];
+    const textLight: [number, number, number] = [120, 112, 105];
+
+    function paintBackground() {
+      pdf.setFillColor(...cream);
+      pdf.rect(0, 0, pageWidth, pageHeight, "F");
+    }
+
+    function newPage() {
+      pdf.addPage();
+      paintBackground();
+      return 20;
+    }
+
+    paintBackground();
+    let yPos = 0;
+
+    const hero = await loadHeroForPDF();
+    if (hero) {
+      const heroHeight = pageWidth * hero.ratio;
+      pdf.addImage(hero.data, "JPEG", 0, 0, pageWidth, heroHeight);
+      yPos = heroHeight + 14;
+    } else {
+      yPos = 22;
+    }
+
+    pdf.setFont("times", "italic");
+    pdf.setFontSize(28);
+    pdf.setTextColor(...peachDark);
+    pdf.text("Wishlist de Juanita", pageWidth / 2, yPos, { align: "center" });
     yPos += 8;
 
-    pdf.setFontSize(10);
-    pdf.setFont("helvetica", "normal");
     const today = new Date().toLocaleDateString("es-AR");
-    pdf.text(`Generado: ${today}`, margin, yPos);
-    yPos += 8;
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(10);
+    pdf.setTextColor(...textLight);
+    pdf.text(`Ítems pendientes · ${today}`, pageWidth / 2, yPos, { align: "center" });
+    yPos += 12;
 
-    pdf.setDrawColor(249, 168, 212);
-    pdf.line(margin, yPos, pageWidth - margin, yPos);
-    yPos += 6;
+    let hasPending = false;
 
     CHECKLIST_SECTIONS.forEach((section) => {
       const pendingItems = section.items.filter((item) => {
@@ -214,40 +265,73 @@ export function Checklist() {
       });
 
       if (pendingItems.length === 0) return;
+      hasPending = true;
 
-      if (yPos > pageHeight - 30) {
-        pdf.addPage();
-        yPos = margin;
-      }
+      if (yPos > pageHeight - 40) yPos = newPage();
 
-      pdf.setFontSize(12);
+      pdf.setFillColor(...peachLight);
+      pdf.roundedRect(margin, yPos - 6, contentWidth, 9, 2, 2, "F");
       pdf.setFont("helvetica", "bold");
-      pdf.text(`${section.name}`, margin, yPos);
-      yPos += 6;
-
-      pdf.setFontSize(9);
-      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.setTextColor(...textDark);
+      pdf.text(section.name, margin + 4, yPos);
+      yPos += 10;
 
       pendingItems.forEach((item) => {
         const itemStates = states.get(item.id) || [];
         const checkedCount = itemStates.filter((s) => s.checked).length;
         const remaining = item.quantity - checkedCount;
 
-        const text = `• ${item.label} — faltan ${remaining} de ${item.quantity}`;
-        const lines = pdf.splitTextToSize(text, maxWidth - 10) as string[];
+        const countText =
+          item.quantity === 1 ? "" : `faltan ${remaining} de ${item.quantity}`;
+        const labelWidth = contentWidth - (countText ? 42 : 10);
+        const lines = pdf.splitTextToSize(item.label, labelWidth) as string[];
+        const blockHeight = lines.length * 5 + 2;
 
-        lines.forEach((line: string) => {
-          if (yPos > pageHeight - 15) {
-            pdf.addPage();
-            yPos = margin;
-          }
-          pdf.text(line, margin + 5, yPos);
-          yPos += lineHeight;
+        if (yPos + blockHeight > pageHeight - 18) {
+          yPos = newPage();
+        }
+
+        pdf.setDrawColor(...peachDark);
+        pdf.setLineWidth(0.4);
+        pdf.roundedRect(margin + 2, yPos - 3.2, 3.6, 3.6, 0.8, 0.8, "S");
+
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(10);
+        pdf.setTextColor(...textDark);
+        lines.forEach((line, i) => {
+          pdf.text(line, margin + 9, yPos + i * 5);
         });
+
+        if (countText) {
+          pdf.setFontSize(9);
+          pdf.setTextColor(...textLight);
+          pdf.text(countText, pageWidth - margin - 2, yPos, { align: "right" });
+        }
+
+        yPos += blockHeight + 3;
       });
 
-      yPos += 4;
+      yPos += 5;
     });
+
+    if (!hasPending) {
+      pdf.setFont("times", "italic");
+      pdf.setFontSize(14);
+      pdf.setTextColor(...peachDark);
+      pdf.text("¡No queda nada pendiente! Todo listo para Juanita", pageWidth / 2, yPos + 10, { align: "center" });
+    }
+
+    const totalPages = pdf.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      pdf.setPage(i);
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(8);
+      pdf.setTextColor(...peachDark);
+      pdf.text("♥", pageWidth / 2, pageHeight - 10, { align: "center" });
+      pdf.setTextColor(...textLight);
+      pdf.text(`${i} / ${totalPages}`, pageWidth - margin, pageHeight - 10, { align: "right" });
+    }
 
     const fileName = `wishlist-pendientes-${today.replace(/\//g, "-")}.pdf`;
     pdf.save(fileName);
